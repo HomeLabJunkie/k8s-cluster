@@ -7,3 +7,5 @@ components:
   - ../../components/common
 resources:
   - ./echo-server/ks.yaml
+  - ./trilium/ks.yaml
+  - ./vaultwarden/ks.yaml
