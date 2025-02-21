@@ -14,4 +14,3 @@ resources:
   - ./metrics-server.yaml
   - ./spegel.yaml
   - ./stakater.yaml
-  - ./rook-ceph.yaml
