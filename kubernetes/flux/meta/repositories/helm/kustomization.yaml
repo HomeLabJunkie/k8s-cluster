@@ -14,3 +14,5 @@ resources:
   - ./metrics-server.yaml
   - ./spegel.yaml
   - ./stakater.yaml
+  - ./weaveworks.yaml
+  
