@@ -20,4 +20,6 @@ spec:
       create: true
       passwordHash: $2a$10$lf17sJPGp8vuy0OPpf4SXejwELX/FcPOHOiBdLWvuJAt9J8OPZJW.
       username: admin
+    image:
+      tag: 0.39.0-rc.1
 
