@@ -1,0 +1,99 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app vaultwarden
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  releaseName: vaultwarden
+  targetNamespace: default
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      vaultwarden:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: vaultwarden/server
+              tag: latest
+            env:
+              DATA_FOLDER: data
+              ICON_CACHE_FOLDER: data/icon_cache
+              ATTACHMENTS_FOLDER: data/attachments
+              DOMAIN: "https://vaultwarden.${SECRET_DOMAIN}"
+              TZ: "${TIMEZONE}"
+              SIGNUPS_ALLOWED: "false"
+              WEBSOCKET_ENABLED: "true"
+              WEBSOCKET_ADDRESS: 0.0.0.0
+              WEBSOCKET_PORT: 3012
+              SMTP_HOST: smtp.gmail.com
+              SMTP_FROM: vaultwarden@${SECRET_DOMAIN}
+              SMTP_FROM_NAME: vaultwarden
+              SMTP_TIMEOUT: 15
+              SMTP_SECURITY: "starttls"
+              SMTP_PORT: 587
+              SMTP_DEBUG: "false"
+              LOG_LEVEL: "debug"
+              LOG_FILE: "/data/vaultwarden.log"
+              EXTENDED_LOGGING: "true"
+            envFrom:
+              - secretRef:
+                  name: vaultwarden-secrets
+#              - secretRef:
+#                  name: vaultwarden-db-secret
+            resources:
+              requests:
+                cpu: 100m
+                memory: 100Mi
+              limits:
+                memory: 2Gi
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: &port 80
+    ingress:
+      app:
+        enabled: true
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: *port
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config:
+        enabled: true
+        existingClaim: vaultwarden-pvc
+        globalMounts:
+          - path: /data
