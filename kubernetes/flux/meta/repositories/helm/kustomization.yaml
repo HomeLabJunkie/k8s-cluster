@@ -17,4 +17,4 @@ resources:
   - ./weaveworks.yaml
   - ./backube.yaml
   - ./wiremind.yaml
-  - ./pireaus.yaml
+  - ./piraeus.yaml
