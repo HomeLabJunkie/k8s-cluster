@@ -15,4 +15,4 @@ resources:
   - ./spegel.yaml
   - ./stakater.yaml
   - ./weaveworks.yaml
-  
+  - ./backube.yaml
