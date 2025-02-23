@@ -5,7 +5,7 @@ kind: Kustomization
 namespace: system
 components:
   - ../../components/common
-  - ../../../shared/components/common
+  # - ../../../shared/components/common
 resources:
   - ./snapshot-controller/ks.yaml
   - ./volsync/ks.yaml
