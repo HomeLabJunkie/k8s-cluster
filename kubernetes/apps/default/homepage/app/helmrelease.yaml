@@ -64,8 +64,8 @@ spec:
         seccompProfile:
           type: RuntimeDefault
     service:
-      app:
-        controller: homepage
+      *app :
+        controller: *app
         ports:
           http:
             port: &port 3000
