@@ -1,0 +1,73 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage
+data:
+  bookmarks.yaml: |
+    - Quick Links:
+        - home-ops:
+            - icon: github.png
+              href: https://github.com/martinohmann/home-ops
+        - All Pods:
+            - icon: kubernetes.png
+              href: https://kube-web-view.18b.haus/clusters/_all/namespaces/_all/pods
+  docker.yaml: ""
+  kubernetes.yaml: |
+    mode: cluster
+  services.yaml: |
+    - Observability:
+        - Prometheus (storage):
+            href: https://prometheus.storage.18b.haus
+            icon: prometheus.png
+        - Weave GitOps (storage):
+            href: https://gitops.storage.18b.haus
+            icon: https://github.com/weaveworks/weave-gitops/blob/main/website/static/img/weave-logo.png?raw=true
+    - Storage:
+        - Backrest:
+            href: https://backrest.18b.haus
+            icon: sh-backrest.png
+        - Filebrowser:
+            href: https://filebrowser.18b.haus
+            icon: filebrowser.png
+        - Minio:
+            href: https://minio.18b.haus
+            icon: minio.png
+    - Tools:
+        - Zot Registry:
+            href: https://registry.18b.haus
+            icon: https://zotregistry.dev/v2.0.4/assets/images/logo.svg
+  settings.yaml: |
+    background:
+      image: https://static.18b.haus/img/wooden-floor.jpg
+      opacity: 25
+    color: stone
+    fiveColumns: false
+    headerStyle: clean
+    hideErrors: true
+    hideVersion: true
+    iconStyle: theme
+    layout:
+      Infrastructure:
+        style: row
+        columns: 3
+      Observability:
+        style: row
+        columns: 3
+      Automation:
+        style: column
+      Storage:
+        style: column
+      Tools:
+        style: column
+      Media:
+        style: row
+        columns: 3
+      Quick Links:
+        style: row
+        columns: 3
+    showStats: false
+    statusStyle: dot
+    target: _self
+    title: Home
+  widgets.yaml: ""
