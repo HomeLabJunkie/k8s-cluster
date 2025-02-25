@@ -16,5 +16,4 @@ resources:
   - ./stakater.yaml
   - ./weaveworks.yaml
   - ./backube.yaml
-  - ./wiremind.yaml
   - ./piraeus.yaml
