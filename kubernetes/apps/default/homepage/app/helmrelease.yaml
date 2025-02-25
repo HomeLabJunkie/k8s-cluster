@@ -68,7 +68,8 @@ spec:
         controller: homepage
         ports:
           http:
-            port: 3000
+            port: &port 3000
+
     ingress:
       app:
         enabled: true
