@@ -68,6 +68,6 @@ data:
         columns: 3
     showStats: false
     statusStyle: dot
-    target: _self
+    target: _new
     title: Home
   widgets.yaml: ""
