@@ -71,8 +71,10 @@ spec:
         ports:
           http:
             port: 8087
+
     persistence:
-      tmp:
-        type: emptyDir
+      config:
+        enabled: true
+        existingClaim: bitwarden-pvc
         globalMounts:
-          - path: /tmp
+          - path: /data
