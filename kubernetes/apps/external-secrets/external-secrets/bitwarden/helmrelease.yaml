@@ -1,80 +1,26 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
-apiVersion: helm.toolkit.fluxcd.io/v2
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app bitwarden
-  namespace: external-secrets
+  name: bitwarden-secrets
+  namespace: bitwarden
 spec:
-  interval: 5m
+  releaseName: bitwarden-secrets
   chart:
     spec:
-      chart: app-template
-      version: 3.7.1
+      chart: bitwarden-secrets
+      version: "2025.2.0"  # Adjust based on the available version
       sourceRef:
         kind: HelmRepository
-        name: bjw-s
+        name: bitwarden-secrets-repo
         namespace: flux-system
-      interval: 5m
-  maxHistory: 2
-  install:
-    createNamespace: true
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
+  interval: 5m
   values:
-    defaultPodOptions:
-      securityContext:
-        runAsUser: 769
-        runAsGroup: 769
-        runAsNonRoot: true
-    controllers:
-      bitwarden:
-        containers:
-          app:
-            image:
-              repository: ghcr.io/roxedus/bw
-              tag: 2025.1.3@sha256:635f20ba369116ed0f36b6b4fcb2296e18891149343b832642d88efaacb024e4
-            envFrom:
-              - secretRef:
-                  name: bitwarden-secret
-            securityContext:
-              readOnlyRootFilesystem: true
-            probes:
-              liveness:
-                enabled: true
-                custom: true
-                spec:
-                  periodSeconds: 120
-                  exec:
-                    command:
-                      - sh
-                      - -c
-                      - /healthcheck.sh
-                  timeoutSeconds: 5
-              readiness:
-                enabled: false
-              startup:
-                enabled: false
-            resources:
-              requests:
-                memory: 256Mi
-                cpu: 100m
-              limits:
-                memory: 512Mi
+    ingress:
+      enabled: true
+      host: secrets.${SECRET_DOMAIN}
     service:
-      app:
-        controller: *app
-        ports:
-          http:
-            port: 8087
-
+      type: ClusterIP
     persistence:
-      config:
-        enabled: true
-        existingClaim: bitwarden-pvc
-        globalMounts:
-          - path: /data
+      enabled: true
+      storageClass: ceph-block
+      size: 8Gi
