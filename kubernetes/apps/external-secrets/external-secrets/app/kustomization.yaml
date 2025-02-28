@@ -8,7 +8,7 @@ resources:
   - ./network-policy.yaml
 configMapGenerator:
   - name: external-secrets-helm-values
-    namespace: kube-system
+    namespace: external-secrets
     files:
       - values.yaml=./helm-values.yaml
 configurations:
