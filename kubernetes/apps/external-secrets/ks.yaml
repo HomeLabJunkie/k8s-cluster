@@ -42,8 +42,8 @@ spec:
     substituteFrom:
       - kind: Secret
         name: sops-bw-secrets
-  dependsOn:
-    - name: cluster-apps-external-secrets
+#  dependsOn:
+#    - name: cluster-apps-external-secrets
   healthCheckExprs:
     - apiVersion: external-secrets.io/v1beta1
       kind: ClusterSecretStore
