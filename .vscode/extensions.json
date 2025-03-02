@@ -8,6 +8,7 @@
         "will-stone.in-any-case",
         "EditorConfig.editorconfig",
         "PKief.material-icon-theme",
+        "signageos.signageos-vscode-sops",
         "Gruntfuggly.todo-tree"
     ]
 }

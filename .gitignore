@@ -22,3 +22,4 @@ Brewfile.lock.json
 # Bootstrap
 /config.yaml
 cloudflared.json
+**/*.tmp.[extension]

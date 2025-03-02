@@ -8,4 +8,5 @@ components:
 resources:
   - ./flux-operator/ks.yaml
   - ./ww-gitops/ks.yaml
-  
+  - ./cyclops/ks.yaml
+

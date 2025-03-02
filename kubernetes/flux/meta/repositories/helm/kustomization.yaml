@@ -18,4 +18,5 @@ resources:
   - ./backube.yaml
   - ./piraeus.yaml
   - ./external-secrets.yaml
+  - ./cyclops.yaml
 
