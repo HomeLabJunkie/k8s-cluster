@@ -93,3 +93,4 @@ spec:
         existingClaim: trilium-data-pvc
         globalMounts:
           - path: *datadir
+            readonly: false
