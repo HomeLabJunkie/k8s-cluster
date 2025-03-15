@@ -36,16 +36,6 @@ spec:
   values:
 
     controllers:
-      main:
-        initContainers:
-          fixperms:
-            image:
-              repository: busybox
-              tag: latest
-            args: ["sh", "-c", "chown -R 1000:1000 /home/node/trilium-data"]
-            securityContext:
-              runAsUser: 0
-              runAsGroup: 0
       trilium:
         annotations:
           reloader.stakater.com/auto: "true"
