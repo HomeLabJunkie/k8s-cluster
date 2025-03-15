@@ -5,4 +5,4 @@ kind: Kustomization
 resources:
   - ./external-dns.yaml
   - ./ingress-nginx.yaml
-  - ./rook-ceph.yaml
+  - ./bjw-s.yaml
