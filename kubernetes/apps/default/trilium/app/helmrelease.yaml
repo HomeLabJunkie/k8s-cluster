@@ -104,4 +104,4 @@ spec:
         globalMounts:
           - path: *datadir
 #          - path: /home/node/trilium-data
-            readonly: false
+#            readonly: false
