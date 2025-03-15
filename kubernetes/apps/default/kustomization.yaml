@@ -8,3 +8,5 @@ components:
   - ../../components/repos/app-template
 resources:
   - ./echo/ks.yaml
+#  - ./vaultwarden/ks.yaml
+#  - ./trilium/ks.yaml
