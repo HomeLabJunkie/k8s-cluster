@@ -1,0 +1,14 @@
+machine:
+  kubelet:
+    extraMounts:
+      - destination: /var/mnt/storage
+        type: bind
+        source: /var/mnt/storage
+        options:
+          - bind
+          - rshared
+          - rw
+  disks:
+    - device: /dev/disk/by-id/ata-TEAM_T2531TB_TPBF2409110020100885
+      partitions:
+        - mountpoint: /var/mnt/storage
