@@ -92,5 +92,6 @@ spec:
         enabled: true
         existingClaim: trilium-data-pvc
         globalMounts:
-          - path: *datadir
+#          - path: *datadir
+          - path: /home/node/trilium-data
             readonly: false
