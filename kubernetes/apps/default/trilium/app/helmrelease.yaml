@@ -88,10 +88,11 @@ spec:
           - hosts:
               - *host
     persistence:
-      config:
-        enabled: true
+      data:
+      # config:
+      #   enabled: true
         existingClaim: trilium-data-pvc
         globalMounts:
-          - path: *datadir
-#          - path: /home/node/trilium-data
+#          - path: *datadir
+          - path: /home/node/trilium-data
 #            readonly: false
