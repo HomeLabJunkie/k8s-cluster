@@ -9,7 +9,7 @@
 #   type: oci
 #   interval: 5m
 #   url: oci://ghcr.io/bjw-s/helm
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: bjw-s
