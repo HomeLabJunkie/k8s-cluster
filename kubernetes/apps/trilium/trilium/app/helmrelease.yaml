@@ -43,7 +43,7 @@ spec:
           *app :
             image:
               repository: triliumnext/notes
-              tag: v0.91.6
+              tag: v0.92.4
             env:
               TZ: ${TIMEZONE}
               TRILIUM_DATA_DIR: &datadir /trilium-data
