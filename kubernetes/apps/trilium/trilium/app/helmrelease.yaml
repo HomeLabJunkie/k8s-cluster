@@ -65,12 +65,23 @@ spec:
   #     fsGroupChangePolicy: OnRootMismatch
   #     seccompProfile: { type: RuntimeDefault }
 
+    # service:
+    #   *app :
+    #     controller: *app
+    #     ports:
+    #       http:
+    #         port: &port 8080
+
     service:
-      *app :
-        controller: *app
+      main:
+        controller: main
+        enabled: true
         ports:
           http:
-            port: &port 8080
+            # What port the cluster is listening on
+            port: 8080
+            # What port the container is listening on
+            targetPort: 8080
 
     ingress:
       app:
@@ -88,9 +99,21 @@ spec:
         tls:
           - hosts:
               - *host
+    # persistence:
+    #   config:
+    #     enabled: true
+    #     existingClaim: trilium-data-pvc
+    #     globalMounts:
+    #       - path: *datadir
+
     persistence:
-      config:
+      data:
         enabled: true
-        existingClaim: trilium-data-pvc
+        type: persistentVolumeClaim
+        size: 20Gi
+        retain: true
+        # Since it's SQLite, the PVC should only be RWO
+        accessMode: ReadWriteOnce
         globalMounts:
-          - path: *datadir
+        - path: /home/node/trilium-data
+          existingClaim: trilium-data-pvc
