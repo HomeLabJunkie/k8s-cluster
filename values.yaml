@@ -1,0 +1,48 @@
+## This chart relies on the common library chart from bjw-s
+## You can find it and the values you can provide and modify, at https://github.com/bjw-s/helm-charts/blob/common-3.3.2/charts/library/common/values.yaml
+## Refer there for more detail about the supported values.
+## Any values that you find in the above `values.yaml` can be provided to this chart and are then rendered.
+
+controllers:
+  main:
+    containers:
+      trilium:
+        image:
+          repository: triliumnext/notes
+          tag: v0.91.6
+          pullPolicy: IfNotPresent
+        env:
+          key: "value"
+
+persistence:
+  data:
+    enabled: true
+    type: persistentVolumeClaim
+    existingClaim: raw-block-pvc
+
+# This is used to modify the config.ini of the Trilium instance
+configini:
+  general:
+    instanceName: ""
+    # Disable authentication to Trilium? (if you're running it on a private network, or have authentication handled by another component)
+    noAuthentication: false
+    # Disable backups of the database?
+    noBackup: false
+  network:
+    host: "0.0.0.0"
+    port: 8080
+    https: false
+    certPath: ""
+    keyPath: ""
+    trustedReverseProxy: true
+#ingress:
+#  main:
+#    enabled: true
+#    annotations:
+#      # proxy-body-size is set to 0 to remove the body limit on file uploads
+#      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+#    hosts:
+#      - host: trilium.local
+#        paths:
+#          - path: "/api/v1"
+#    tls: []
