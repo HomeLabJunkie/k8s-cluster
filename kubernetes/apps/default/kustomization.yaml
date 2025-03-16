@@ -9,4 +9,4 @@ components:
 resources:
   - ./echo/ks.yaml
 #  - ./vaultwarden/ks.yaml
-  - ./trilium/ks.yaml
+#   - ./trilium/ks.yaml
