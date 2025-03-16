@@ -6,3 +6,4 @@ resources:
   - ./external-dns.yaml
   - ./ingress-nginx.yaml
   - ./bjw-s.yaml
+  - ./rook-ceph.yaml
